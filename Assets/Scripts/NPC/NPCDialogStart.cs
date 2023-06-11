@@ -16,6 +16,7 @@ public class NPCDialogStart : MonoBehaviour, IInteractable
             RangeChanged();
         }
     }
+
     [Header("Place conversationSO here")]
     [SerializeField] private ConversationSO conversation;
 
@@ -33,11 +34,9 @@ public class NPCDialogStart : MonoBehaviour, IInteractable
 
     public Transform Interact()
     {
-        if (conversationDisabled)
-        {
-            dialogSystem.StartConversation(conversation);
-        }
-        
+        if (conversationDisabled) return transform;
+
+        dialogSystem.StartConversation(conversation);
         return transform;
     }
 

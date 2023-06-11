@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class DialogAnswers : MonoBehaviour
 {
     private Dialog dialog;
+    [SerializeField] private LevelSpawnSO levelSpawn;
     [SerializeField] private AllConversationsListSO allConversations;
     [SerializeField] private GameObject FiveQuestionPuzzle;
     [SerializeField] private CatStatuePuzzle CatStatuePuzzle;
@@ -51,7 +52,8 @@ public class DialogAnswers : MonoBehaviour
                 break;
 
             case "StartScaleAntiqueScene":
-                SceneManager.LoadScene("AntiqueScaleGame");
+                GameManager.GameManagerInstance.LoadScene("AntiqueScaleGame");
+                // change sounds here or inside scene?
                 break;
 
             case "StartStatuePuzzle":

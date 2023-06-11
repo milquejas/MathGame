@@ -11,6 +11,7 @@ using UnityEngine;
 public class TouchMovementAndInteraction : MonoBehaviour, IPlayerTouch
 {
     [SerializeField] private float minimumMove, movementSpeed, interactionCircleSize;
+    [SerializeField] private LevelSpawnSO spawnPoint;
 
     private Vector2 movementDirection, playerPosition;
     private bool disableMovement;
@@ -24,6 +25,15 @@ public class TouchMovementAndInteraction : MonoBehaviour, IPlayerTouch
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        // setup spawn
+        transform.position = spawnPoint.CurrentSpawnLocation;
+        //Camera.main.transform.position = spawnPoint.CurrentSpawnLocation;
+    }
+
+    public void SetSpawnLocation()
+    {
+        spawnPoint.CurrentSpawnLocation = transform.position;
     }
 
     void Update()
