@@ -1,35 +1,43 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 /*
  * Quick fade in
- * ref: https://forum.unity.com/threads/how-can-i-fade-in-out-a-canvas-group-alpha-color-with-duration-time.969864/#post-6311295
+ * old ref: https://forum.unity.com/threads/how-can-i-fade-in-out-a-canvas-group-alpha-color-with-duration-time.969864/#post-6311295
  * TODO: setup for scene switching
  */
 
 public class FadeToBlack : MonoBehaviour
 {
-    private float desiredAlpha;
-    private float currentAlpha;
     [SerializeField] private Image blackPixel;
     [SerializeField] private GameObject fadeOutCanvas;
 
-    private void OnEnable()
+    public void ToggleFadeToBlack(float duration)
     {
-        currentAlpha = blackPixel.color.a;
-        if (currentAlpha <= 0)
-            desiredAlpha = 1f;
+        fadeOutCanvas.SetActive(true);
 
-        if (currentAlpha >= 1)
-            desiredAlpha = 0f;
+        float currentAlpha = blackPixel.color.a;
+        float targetAlpha = 0;
+        if (blackPixel.color.a == 0)
+            targetAlpha = 1;
+
+        StartCoroutine(StartFade(duration, targetAlpha, currentAlpha));
     }
 
-    void Update()
+    private IEnumerator StartFade(float duration, float targetAlpha, float currentAlpha)
     {
-        currentAlpha = Mathf.MoveTowards(currentAlpha, desiredAlpha, 2.0f * Time.deltaTime);
-        blackPixel.color = new Color(1,1,1, currentAlpha);
+        float elapsedTime = 0f;
 
-        if (currentAlpha == desiredAlpha)
-            this.gameObject.SetActive(false);
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float percent = Mathf.Clamp01(elapsedTime / duration);
+
+            blackPixel.color = Color.LerpUnclamped(new Color(1, 1, 1, currentAlpha), new Color(1, 1, 1, targetAlpha), percent);
+            yield return null;
+        }
+        if (targetAlpha == 0)
+            fadeOutCanvas.SetActive(false);
     }
 }

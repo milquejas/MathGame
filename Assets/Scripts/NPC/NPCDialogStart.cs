@@ -4,7 +4,7 @@ using UnityEngine;
 public class NPCDialogStart : MonoBehaviour, IInteractable
 {
     private bool _inRange;
-    private bool conversationDisabled;
+    [SerializeField] private bool conversationDisabled;
     private IEnumerator questionmarkAnimationCoroutine;
     public bool InRange
     {
@@ -33,7 +33,11 @@ public class NPCDialogStart : MonoBehaviour, IInteractable
 
     public Transform Interact()
     {
-        dialogSystem.StartConversation(conversation);
+        if (conversationDisabled)
+        {
+            dialogSystem.StartConversation(conversation);
+        }
+        
         return transform;
     }
 
