@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FadeToBlack fadeOut;
     [SerializeField] private TMP_Text versionText;
 
-    [SerializeField] private float fadeTime;
     [Header("Keeps spawn locations permanent in isometric scene...")]
     [SerializeField] private LevelSpawnSO spawnPoint;
     void Start()
@@ -61,39 +61,36 @@ public class GameManager : MonoBehaviour
         GameManagerInstance = null;
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, float fadeTime = 0.7f)
     {
         if (coroutine is not null) return;
 
-        coroutine = LoadSceneAndFadeout(sceneName);
+        coroutine = LoadSceneAndFadeout(sceneName, fadeTime);
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator LoadSceneAndFadeout(string sceneName)
+    // suddenly LoadSceenAsync obsolette??
+    private IEnumerator LoadSceneAndFadeout(string sceneName, float fadeTime)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
-        asyncOperation.allowSceneActivation = false;
 
         // wait for fadout before scene change
         fadeOut.ToggleFadeToBlack(fadeTime);
 
-        yield return new WaitForSeconds(fadeTime + 0.2f);
+        yield return new WaitForSeconds(fadeTime);
 
         while (!asyncOperation.isDone)
         {
-            if (asyncOperation.progress >= 0.9f)
-            {
-                asyncOperation.allowSceneActivation = true;
-
-                fadeOut.ToggleFadeToBlack(fadeTime);
-            }
-            // could put loading screen things here
-
-            // set to null so level swap can happen again
-            coroutine = null;
-
             yield return null;
         }
+
+        fadeOut.ToggleFadeToBlack(fadeTime);
+
+        // set to null so level swap can happen again
+        coroutine = null;
+
+        yield return null;
+
     }
 
     private string CheckDevice()
