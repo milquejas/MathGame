@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 89
+  controlID: 70
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 123
+  controlID: 100
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 124
+  controlID: 57
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 125
+  controlID: 58
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -453,21 +453,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 705effff1cb0ffff2eb0ffff36b0ffff14b1fffff8b1ffffd6b2ffff8cb4ffffc0b9ffffcac6ffffcadcffffd0dcffffd2dcffff22fbffff309600008096000064a3000086a30000b2a30000
+      m_ExpandedIDs: 024afeffe654feff82b9feffdcb9feff1016ffff1816ffff8816ffff304bffff8a4bffff184cffff884cffff5e68ffffb868ffff9c94ffff0c95fffff695ffff5a9affff52c4ffff64c4ffff6cc4ffffdcc4ffff88e9ffffc8faffff22fbfffff4fffffffc9b00006835010094350100a2350100c43501007c5a0100905a0100be5a0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: GameManager
+        m_OriginalName: GameManager
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -1336
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -847,7 +847,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Puzzles/ScaleMinigameQuests
+    - Assets/Scenes/MainScenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -862,7 +862,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 175}
     m_SelectedIDs: fa6d0000
     m_LastClickedID: 28154
-    m_ExpandedIDs: 000000004663000030640000326400003464000036640000386400003a6400003c6400003e64000040640000426400004464000046640000486400004a6400004c6400004e64000050640000526400005464000056640000586400005a6400005c6400005e64000060640000626400006464000066640000686400006a6400006c6400006e64000070640000
+    m_ExpandedIDs: 00000000cc63000080650000826500008465000086650000886500008a6500008c6500008e65000090650000926500009465000096650000986500009a6500009c6500009e650000a0650000a2650000a4650000a6650000a8650000aa650000ac650000ae650000b0650000b2650000b4650000b6650000b8650000ba650000bc650000be650000c0650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -887,10 +887,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 749}
+    scrollPos: {x: 0, y: 149}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000466300003064000032640000346400003a6400003c6400003e640000426400004464000046640000486400004a6400004c6400004e6400005064000056640000586400005a6400005c640000626400006464000066640000686400006a6400006c6400006e64000070640000cc640000fc640000006500002c650000d8950000de95000066a50000
+    m_ExpandedIDs: ffffffff00000000cc63000080650000826500008465000086650000886500008a6500008c6500008e65000090650000926500009465000096650000986500009a6500009c6500009e650000a0650000a2650000a4650000a6650000a8650000aa650000ac650000ae650000b0650000b2650000b4650000b6650000b8650000ba650000bc650000be650000c0650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

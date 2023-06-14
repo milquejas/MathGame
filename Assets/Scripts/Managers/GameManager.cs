@@ -1,13 +1,11 @@
-using System;
 using System.Collections;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /*
- * Handle fadeout
- * Handle scene change states:
+ * Handle scene change states
+ * ref:
  * https://www.youtube.com/watch?v=OmobsXZSRKo
  * Handle Saving?
  * Check which device plays?
@@ -24,19 +22,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string version;
 
     [SerializeField] private FadeToBlack fadeOut;
+    [SerializeField] private float fadeTime;
     [SerializeField] private TMP_Text versionText;
-
+    
     [Header("Keeps spawn locations permanent in isometric scene...")]
     [SerializeField] private LevelSpawnSO spawnPoint;
+    
     void Start()
     {
-        CheckDevice();
+        print("CAPSTEST _______________");
+        //CheckDevice();
         versionText.text = version;
     }
 
     //temp 
     private void Update()
     {
+        print(this);
         if (Input.GetButtonDown("Jump"))
         {
             LoadScene("IsometricMain");
@@ -45,39 +47,33 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManagerInstance is not null)
+        if (GameManagerInstance is not null && GameManagerInstance != this)
         {
             Destroy(gameObject);
             return;
         }
-        
-        GameManagerInstance = this;
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            GameManagerInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    // Nulls on disable to keep domain reload off :)
-    private void OnDisable()
-    {
-        GameManagerInstance = null;
-    }
-
-    public void LoadScene(string sceneName, float fadeTime = 0.7f)
+    public void LoadScene(string sceneName)
     {
         if (coroutine is not null) return;
 
-        coroutine = LoadSceneAndFadeout(sceneName, fadeTime);
+        coroutine = LoadSceneAndFadeout(sceneName);
         StartCoroutine(coroutine);
     }
 
-    // suddenly LoadSceenAsync obsolette??
-    private IEnumerator LoadSceneAndFadeout(string sceneName, float fadeTime)
+    private IEnumerator LoadSceneAndFadeout(string sceneName)
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
-
         // wait for fadout before scene change
         fadeOut.ToggleFadeToBlack(fadeTime);
+        yield return new WaitForSeconds(fadeTime + 0.1f);
 
-        yield return new WaitForSeconds(fadeTime);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
         while (!asyncOperation.isDone)
         {
@@ -85,12 +81,10 @@ public class GameManager : MonoBehaviour
         }
 
         fadeOut.ToggleFadeToBlack(fadeTime);
+        yield return new WaitForSeconds(fadeTime + 0.1f);
 
         // set to null so level swap can happen again
         coroutine = null;
-
-        yield return null;
-
     }
 
     private string CheckDevice()

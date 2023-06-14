@@ -29,7 +29,7 @@ public class FadeToBlack : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < duration)
+        while (elapsedTime <= duration)
         {
             elapsedTime += Time.deltaTime;
             float percent = Mathf.Clamp01(elapsedTime / duration);
@@ -37,7 +37,7 @@ public class FadeToBlack : MonoBehaviour
             image.color = Color.LerpUnclamped(new Color(1, 1, 1, currentAlpha), new Color(1, 1, 1, targetAlpha), percent);
             yield return null;
         }
-        if (targetAlpha == 0)
+        if (targetAlpha <= 0)
             fadeOutCanvas.SetActive(false);
     }
 }

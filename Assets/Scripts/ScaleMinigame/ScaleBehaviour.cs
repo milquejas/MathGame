@@ -107,7 +107,6 @@ public class ScaleBehaviour : MonoBehaviour
     public void LeaveScaleMinigame()
     {
         GameManager.GameManagerInstance.LoadScene("IsometricMain");
-
     }
 }
 
