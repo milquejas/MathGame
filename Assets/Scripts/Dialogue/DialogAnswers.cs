@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+
 /*
 * Dialog question execution happens here? 
 * Set case names in Conversation scriptable object and set what happens in this class
@@ -11,7 +11,9 @@ using UnityEngine.SceneManagement;
 public class DialogAnswers : MonoBehaviour
 {
     private Dialog dialog;
-    [SerializeField] private LevelSpawnSO levelSpawn;
+
+    [SerializeField] private TaskListSO taskList;
+
     [SerializeField] private AllConversationsListSO allConversations;
     [SerializeField] private GameObject FiveQuestionPuzzle;
     [SerializeField] private CatStatuePuzzle CatStatuePuzzle;
@@ -21,7 +23,7 @@ public class DialogAnswers : MonoBehaviour
         dialog = GetComponent<Dialog>();
     }
 
-    public void AnswerReactions(string answerCase)
+    public void AnswerReactions(string answerCase, NPCDialogStart npcDialogStarter)
     {
         switch (answerCase)
         {
@@ -38,12 +40,13 @@ public class DialogAnswers : MonoBehaviour
 
                 // example on how to change to specific different conversation mid dialogue
             case "ExampleDialogTree_PickedHard":
-                dialog.StartConversation(allConversations.ConversationSO.Find(x => x.ConversationName == "NPCExampleDialogTreeHard"));
+                dialog.StartConversation(allConversations.ConversationSO.Find(x => x.ConversationName == "NPCExampleDialogTreeHard"), npcDialogStarter);
                 break;
 
             case "ExampleDialogTree_CorrectAnswer":
                 dialog.StartConversation(allConversations.ConversationSO.Find(x => x.ConversationName == "NPCExampleDialogTreeSuccess"));
-
+                
+                npcDialogStarter.TaskCompleted();
                 break;
 
             case "StartFiveQuestionsPuzzle":

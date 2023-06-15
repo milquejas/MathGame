@@ -30,19 +30,8 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        print("CAPSTEST _______________");
         //CheckDevice();
         versionText.text = version;
-    }
-
-    //temp 
-    private void Update()
-    {
-        print(this);
-        if (Input.GetButtonDown("Jump"))
-        {
-            LoadScene("IsometricMain");
-        }
     }
 
     private void Awake()

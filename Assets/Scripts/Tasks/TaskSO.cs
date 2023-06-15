@@ -9,7 +9,5 @@ public class TaskSO : ScriptableObject
     public int Progress;
     
     public bool Completed;
-
-    public bool IsOptional;
 }
 

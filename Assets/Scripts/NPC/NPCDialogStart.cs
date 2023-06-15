@@ -4,7 +4,10 @@ using UnityEngine;
 public class NPCDialogStart : MonoBehaviour, IInteractable
 {
     private bool _inRange;
+
+
     [SerializeField] private bool conversationDisabled;
+
     private IEnumerator questionmarkAnimationCoroutine;
     public bool InRange
     {
@@ -19,6 +22,7 @@ public class NPCDialogStart : MonoBehaviour, IInteractable
 
     [Header("Place conversationSO here")]
     [SerializeField] private ConversationSO conversation;
+    [SerializeField] private TaskSO npcTask;
 
     [Header("Child questionmarks animation variables")]
     [SerializeField] private RectTransform questionmark;
@@ -36,8 +40,17 @@ public class NPCDialogStart : MonoBehaviour, IInteractable
     {
         if (conversationDisabled) return transform;
 
-        dialogSystem.StartConversation(conversation);
+        dialogSystem.StartConversation(conversation, this);
         return transform;
+    }
+
+    public void TaskCompleted()
+    {
+        conversationDisabled = true;
+        npcTask.Completed = true;
+
+        StopCoroutine(questionmarkAnimationCoroutine);
+        questionmark.gameObject.SetActive(false);
     }
 
     // Animations here
